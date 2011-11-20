@@ -1,0 +1,20 @@
+@(t: String, u: String, uid: String)
+
+@import helpers.Html._
+
+<p class="share">
+   <a id="share-twitter-@(uid)" href="http://twitter.com/home?status=@urlencode(t)%20@urlencode(u)%20@@NesbittBrian" target="_blank"><img src="@routes.Assets.at("images/share/tweet.png")" width="55" height="20" alt="Tweet this" title="Tweet this" /></a>
+   <a id="share-fb-@(uid)" href="http://www.facebook.com/sharer.php?u=@urlencode(u)&t=@urlencode(t)" target="_blank"><img src="@routes.Assets.at("images/share/fb.png")" width="63" height="20" alt="Share on facebook" title="Share on Facebook" /></a>
+   <a id="share-hn-@(uid)" href="http://news.ycombinator.com/submitlink?u=@urlencode(u)&t=@urlencode(t)" target="_blank"><img src="@routes.Assets.at("images/share/hn.png")" width="20" height="20" alt="Share on Hacker News" title="Share on Hacker News" /></a>
+   <a id="share-dz-@(uid)" href="http://www.dzone.com/links/add.html?url=@urlencode(u)&title=@urlencode(t)" target="_blank"><img src="@routes.Assets.at("images/share/dz.png")" width="21" height="20" alt="Share on DZone" title="Share on DZone" /></a>
+</p>
+
+<script type="text/javascript">
+$(document).ready(function()
+{
+   $("#share-twitter-@(uid)").click( function() {gaTrackEvent("SocialLinks", "Twitter@(uid)"); } );
+   $("#share-fb-@(uid)").click( function() {gaTrackEvent("SocialLinks", "Facebook@(uid)"); } );
+   $("#share-hn-@(uid)").click( function() {gaTrackEvent("SocialLinks", "HackerNews@(uid)"); } );
+   $("#share-dz-@(uid)").click( function() {gaTrackEvent("SocialLinks", "DZone@(uid)"); } );
+});
+</script>

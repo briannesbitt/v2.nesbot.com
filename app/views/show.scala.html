@@ -1,0 +1,26 @@
+@(post: Post, older: Post, newer: Post)
+
+@import helpers.Html._
+@import tags._
+
+@template(post.title) {
+
+   <div class="post">
+
+      <h1>@post.title</h1>
+      <div class="date">@prettyTimestamp(post)</div>
+
+      @share(post.title, urlFull(post), "Top")
+      @helpers.Html.render(post)
+      @share(post.title, urlFull(post), "Bottom")
+
+      <div id="post-nav">
+         <span>@if(older!=null) {<a href="@url(older)"><- @older.title</a>}&nbsp;</span>
+         <span><a href="@routes.Application.index()">Home</a></span>
+         <span>@if(newer!=null) {<a href="@url(newer)">@newer.title -></a>}&nbsp;</span>
+         <div class="c"></div>
+      </div>
+   </div>
+
+   @disqus()
+}

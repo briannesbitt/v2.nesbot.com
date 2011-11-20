@@ -1,0 +1,5 @@
+@(slug : String)(body: (Post) => Html)
+
+@if(models.Post.findBySlug(slug) != null) {
+   <p class="quote">@body(models.Post.findBySlug(slug))</p>
+}

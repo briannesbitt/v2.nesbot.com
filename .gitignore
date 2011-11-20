@@ -1,0 +1,17 @@
+# playframework
+tmp
+test-result
+out
+logs
+server.pid
+*.ser
+project/project
+project/target
+target
+RUNNING_PID
+
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea/

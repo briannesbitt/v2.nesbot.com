@@ -1,0 +1,13 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET /                                                             controllers.Application.index()
+
+GET /$year<[0-9]{4}>/$month<[0-9]{1,2}>/$day<[0-9]{1,2}>/:slug    controllers.Application.show(year : Long, month: Long, day: Long, slug)
+
+GET /rss                                                          controllers.Application.rss()
+
+# Map static resources from the /public folder to the /assets URL path
+GET /assets/*file                                                 controllers.Assets.at(path="/public", file)

@@ -1,0 +1,29 @@
+@(posts : List[Post])<?xml version="1.0" encoding="UTF-8" ?>
+@import helpers.Config._
+@import helpers.Html._
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+   <title>Brian Nesbitt's  Blog</title>
+   <link>http://nesbot.com</link>
+   <description>Developer who is always consuming knowledge. Startup enthusiast who doesn't enjoy being a drop in a bucket. Dividend stock investor. Lucky husband and father.</description>
+   <language>en-us</language>
+   <managingEditor>brian@@nesbot.com (Brian Nesbitt)</managingEditor>
+   <image>
+	   <url>http://nesbot.com/images/logo.gif</url>
+	   <title>Brian Nesbitt's  Blog</title>
+	   <link>http://nesbot.com</link>
+   </image>
+   <atom:link href="@(urlbaseabsolute)rss" rel="self" type="application/rss+xml" />
+
+   @for(post <- posts) {
+   <item>
+      <title>@post.title</title>
+      <link>@urlFull(post)</link>
+      <author>brian@@nesbot.com (Brian Nesbitt)</author>
+      <pubDate>@toRFC822(post.updated)</pubDate>
+      <guid>@urlFull(post)</guid>
+      <description><![CDATA[@helpers.Html.render(post)]]></description>
+   </item>
+   }
+</channel>
+</rss>

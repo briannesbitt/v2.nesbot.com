@@ -29,10 +29,7 @@ public class Application extends Controller
          return notFound(notFound.render("template for : " + Html.tagName(post)));
       }
 
-      Post older = post.next();
-      Post newer = post.previous();
-
-      return ok(show.render(post, older, newer));
+      return ok(show.render(post, post.next(), post.previous()));
    }
    public static Result rss()
    {

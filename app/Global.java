@@ -2,7 +2,9 @@ import com.nesbot.commons.datetime.Dater;
 import helpers.Config;
 import models.Post;
 import play.Application;
+import play.Configuration;
 import play.GlobalSettings;
+import play.api.Play;
 import play.mvc.Result;
 
 import java.io.BufferedReader;
@@ -21,6 +23,7 @@ public class Global extends GlobalSettings
    @Override
    public void beforeStart(Application app)
    {
+      Config.init(Configuration.root());
       Global.app = app;
       play.Logger.info("Populating posts - start");
 

@@ -5,16 +5,13 @@ import play.api.Play;
 
 public class Config
 {
-   private static Configuration config;
+   private static Configuration _envConfig;
 
-   private static Configuration config()
+   public static void init(Configuration configuration)
    {
-      if (config != null)
-      {
-         return config;
-      }
-      return config = Play.isDev(Play.current()) ? Configuration.root().getSub("dev") : Configuration.root().getSub("prod");
+      _envConfig = Play.isDev(Play.current()) ? configuration.getSub("dev") : configuration.getSub("prod");
    }
+
    public static boolean isDev()
    {
       return Play.isDev(Play.current());
@@ -23,14 +20,19 @@ public class Config
    {
       return Play.isProd(Play.current());
    }
+   private static String getString(String key)
+   {
+      String envValue = _envConfig.getString(key);
+      return (envValue != null) ? envValue : Configuration.root().getString(key);
+   }
 
    public static String postsPath()
    {
-      return Configuration.root().getString("posts.path");
+      return getString("posts.path");
    }
    public static String urlbaseabsolute()
    {
-      return config().getString("urlbaseabsolute");
+      return getString("urlbaseabsolute");
    }
    public static String urlbaseabsoluteNoSlash()
    {
@@ -39,6 +41,6 @@ public class Config
    }
    public static String googleAnalyticsTracker()
    {
-      return config().getString("gatracker");
+      return getString("gatracker");
    }
 }

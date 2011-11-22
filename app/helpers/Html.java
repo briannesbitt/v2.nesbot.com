@@ -81,19 +81,19 @@ public class Html
       }
       catch(ClassNotFoundException ex)
       {
-         Logger.error("Html.renderDynamic() : could not find view " + viewClazz);
+         Logger.error("Html.renderDynamic() : could not find view " + viewClazz, ex);
       }
       catch(NoSuchMethodException ex)
       {
-         Logger.error("Html.renderDynamic() : could not find render method " + viewClazz);
+         Logger.error("Html.renderDynamic() : could not find render method " + viewClazz, ex);
       }
       catch(IllegalAccessException ex)
       {
-         Logger.error("Html.renderDynamic() : could not invoke render method " + viewClazz);
+         Logger.error("Html.renderDynamic() : could not invoke render method " + viewClazz, ex);
       }
       catch(InvocationTargetException ex)
       {
-         Logger.error("Html.renderDynamic() : could not invoke render method " + viewClazz);
+         Logger.error("Html.renderDynamic() : could not invoke render method " + viewClazz, ex);
       }
       return play.api.templates.Html.empty();
    }

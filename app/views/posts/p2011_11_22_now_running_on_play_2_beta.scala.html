@@ -158,6 +158,14 @@ public static Result rss()
 
 <p>In Play 1.X you could create a job that ran <code>@@OnApplicationStart</code> or write a plugin the handled the start/stop events.  In Play 2.0 there is the concept of a Global object that allows you to handle <code>beforeStart()</code>, <code>onStart()</code>, <code>onStop()</code> and some other events for errors.  I used this to trigger the configuration initialization and loading of the post template files.</p>
 
+<h2>Compiling assets</h2>
+
+<p>Just a quick note to say that I had no problems getting the <a href="http://lesscss.org/">LESS</a> styleshseets compiled and routed.  I quickly tried the same with the javascript files but didn't have much luck.  I am using syntaxhighlighter for the code snippets on the site and I think it already does some "require" calls and I kept getting compiler errors.  I left it for now and will revisit later.</p>
+
+<h2>Public assets routing</h2>
+
+<p>If you stick with the defaults here everything works as expected.  I think the syntax is quite cumbersome <code>&lt;img src="@@routes.Assets.at("images/play.png")" /></code>. In the future I will wrap this in my own helper function which would then just use the Assets helper anyway but at least centralize it.  The other thing I tried, is I generally prefer to serve images from <code>/images</code>, css from <code>/css</code>, js from <code>/js</code> etc. If you do this you need to add a 2nd parameter, folder, to the at() call.  Its explained on the <a href="https://github.com/playframework/Play20/wiki/AssetsPublic">wiki</a> but I really didn't get it at first glance.  The old routes and syntax for static files seemed easier but this is a small issue in the grand scheme.  Either way once I add my wrappers I will be able to change it easily anyway.</p>
+
 <h2>Configuration for several environments</h2>
 
 <p>I didn't see anything in the wiki yet about this so I wrote a quick interface using the supplied helper Configuration methods.  This is another feature that I am sure will be in for the RC release. There is already a helper <code>play.Configuration.getSub()</code> to get all values in a sub-configuration so I am thinking this will get integrated into the various <code>play.Configuration.getString()</code> methods to see if there is a <code>mode.value</code> or just a value defined.  After a quick look today it appears there is something for this in the Scala API but nothing in the Java API as of yet.</p>
@@ -375,3 +383,5 @@ play2 start
 <p>All in all I am happy with how things went considering this is just a BETA that was released a month earlier than expected.  I haven't touched the testing framework as of yet (shame on me!) but that will be next along with form processing and handling.</p>
 
 <p>Feel free to ask any specific questions via email/twitter/google group and I'll do my best to answer them.</p>
+
+<p>The full blog code is available on github : <a href="http://github.com/briannesbitt/nesbot.com">http://github.com/briannesbitt/nesbot.com</a>.</p>

@@ -2,4 +2,6 @@ h1. nesbot.com
 
 I am making the source code of my personal site available publicly in case it helps anybody.  It's developed using the "playframework":http://playframework.org/.  Previously the site was developed against v1.2.3.  Play recently released a BETA version of their upcoming 2.0 release.  I have ported the site to 2.0 BETA and pushed it live.
 
+Here is a blog post about the porting process: "http://nesbot.com/2011/11/22/now-running-on-play-2-beta":http://nesbot.com/2011/11/22/now-running-on-play-2-beta
+
 The old version can still be seen here: "https://github.com/briannesbitt/v1.nesbot.com":https://github.com/briannesbitt/v1.nesbot.com

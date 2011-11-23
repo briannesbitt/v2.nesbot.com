@@ -6,7 +6,7 @@
 
    @for(post <- posts) {
       <div class="post">
-         <h1><a href="@url(post)">@post.title</a></h1>
+         <div class="title"><a href="@url(post)">@post.title</a></div>
          <p class="date">@prettyTimestamp(post)</p>
       </div>
    }

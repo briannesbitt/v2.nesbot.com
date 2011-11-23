@@ -9,7 +9,7 @@ public class Config
 
    public static void init(Configuration configuration)
    {
-      _envConfig = Play.isDev(Play.current()) ? configuration.getSub("dev") : configuration.getSub("prod");
+      _envConfig = isDev() ? configuration.getSub("dev") : configuration.getSub("prod");
    }
 
    public static boolean isDev()

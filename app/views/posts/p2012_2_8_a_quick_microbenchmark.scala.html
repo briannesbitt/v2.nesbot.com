@@ -41,22 +41,22 @@
 <p>It was interesting to see how easy some of the features were to find in some languages compared to others.  Command line parameters, random numbers, benchmarking code etc.  Lets take a look at command line parameters in each language.  They are all similar (some variation of an arg[sv] array) but yet different (array offset, parsing, brackets, semi-colon).  Its these subtle differences that make a lot of language context switching difficult.</p>
 
 <p><pre>
-C++            int len = atoi(argv[1]);
-C#             var len = int.Parse(args[0]);
-java:          int len = Integer.parseInt(args[0]);
-scala:         val len = Integer.parseInt(args(0))
-php:           $len = $argv[1];
+C++                      int len = atoi(argv[1]);
+C#                       var len = int.Parse(args[0]);
+java:                    int len = Integer.parseInt(args[0]);
+scala:                   val len = Integer.parseInt(args(0))
+php:                     $len = $argv[1];
 node.js (coffeescript):  len = process.argv[2]
-groovy:        len = args[0].toInteger()
-python:        alen = int(sys.argv[1])     # len is a reserved word
-ruby:          len = ARGV[0].to_i
+groovy:                  len = args[0].toInteger()
+python:                  alen = int(sys.argv[1])     # len is a reserved word
+ruby:                    len = ARGV[0].to_i
 </pre></p>
 
 <p>A small but effective change included changing <code>pivot = arr[(left+right) / 2]</code> to <code>pivot = arr[(left+right) >> 1]</code>.  In some languages it generated a noticeable increase in performance.  As well it prevented a necessary cast/floor to an int preventing an array lookup of arr[3.5].</p>
 
 <p>Pythons top google links are tied to v2 rather than v3.  Using the old print statement rather than the print() function is pretty frustrating as you view the examples from google and the code seems correct.  The error message was not at all helpful either.  I have seen this in other languages/frameworks as well.</p>
 
-<p>Then we have the browser wars, aka the js engine war.  Chrome posted the best time for the quicksort.  For some reason I was expecting some overhead compared to node.js but the in browser version was pretty much identical in both test cases.  IE was the most consistent and by far had the best time using the Array API sort().  Firefox was really slow on the API call... no idea why.  It was slow enough that I actually got the warning saying the script was running too long.  During the algorithm it was "Not Responding" as well.  I didn't bother running the code in older versions as that was the goal of this exercise.</p>
+<p>Then we have the browser wars, aka the js engine war.  Chrome posted the best time for the quicksort.  For some reason I was expecting some overhead compared to node.js but the in browser version was pretty much identical in both test cases.  IE was the most consistent and by far had the best time using the Array API sort().  Firefox was really slow on the API call... no idea why.  It was slow enough that I actually got the warning saying the script was running too long.  During the algorithm Firefox was "Not Responding" as well.  I didn't bother running the code in older versions as that wasn't the goal of this exercise.</p>
 
 <p>Consective runs in IE and FireFox produced consistent results.  However, this was not true for Chrome. Chrome's performance decreased by about double for the second run and a little more after that to what seemed to be a ceiling.  It probably has to do with GC since on a page refresh the time returned back to the fast time.</p>
 
@@ -64,7 +64,7 @@ ruby:          len = ARGV[0].to_i
 
 <p>Most of the API sorts were faster.  This is not surprising since the api would generally be running in the interpreters native language and are generally written in c++ so the sorts are running native code at that point.  I was surprised that the quicksort algorithm was faster than the API calls for Java and JavaScript.  In Java it is somewhat negligible and if you look at the source the Arrays sort() API is a "tuned" quicksort.  Without spending too much time on it, it <a href="http://code.google.com/p/v8/source/browse/trunk/src/array.js#776">appears that the v8 implementation</a> is doing a Quicksort written in js but makes extra calls to the required compare function among other things.  The compare is necessary as by default the method sorts the elements alphabetically which is obviously not what we wanted.  I assume this is where the overhead comes from, but that seems expensive as its almost 3x longer.</p>
 
-<p>I was also surprised at how well all of the JavaScript engines did compared to the other main stream (server) languages.  The node.js v8 implementation was 10x - 25x faster than most of them and was only less than 2x Java/C#.</p>
+<p>I was also surprised at how well all of the JavaScript engines did compared to the other main stream (server) languages.  The node.js v8 implementation was 10x - 25x faster than most of them and was less than 2x Java/C#.</p>
 
 <p>You can view the code for each implementation on <a href="https://github.com/briannesbitt/QuicksortMicrobenchmark">github</a>.</p>
 

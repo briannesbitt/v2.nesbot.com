@@ -1,5 +1,7 @@
 @*A "quick" microbenchmark*@
 
+@import helpers.Html._
+
 <p>The other day I decided to do some microbenchmarking across several different languages.  I used an array of 1 M integers and applied the <a href="http://en.wikipedia.org/wiki/Quicksort">quicksort</a> sorting algorithm as the test code and also included the native language sort routines where applicable.</p>
 
 <p>I wrote the runner using <a href="http://coffeescript.org/#cake">Cake</a> and <a href="http://coffeescript.org">Coffeescript</a> which compiles to Javascript and runs on <a href="http://nodejs.org/">node.js</a>.  Cake is a very simple build system and is similar to make/rake, as you probably already guessed.</p>
@@ -69,3 +71,7 @@ ruby:                    len = ARGV[0].to_i
 <p>You can view the code for each implementation on <a href="https://github.com/briannesbitt/QuicksortMicrobenchmark">github</a>.</p>
 
 <p>Although I did have the idea before seeing this, the following blog post provided some good information <a href="http://stronglytypedblog.blogspot.com/2009/07/java-vs-scala-vs-groovy-performance.html">http://stronglytypedblog.blogspot.com/2009/07/java-vs-scala-vs-groovy-performance.html</a></p>
+
+@tags.withPost("a-quick-microbenchmark-update-PHP-5-4") { post =>
+You can see the results with PHP 5.4 ... <a href="@urlFull(post)">@post.title</a>
+}

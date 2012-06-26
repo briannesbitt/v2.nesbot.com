@@ -94,7 +94,7 @@ $app->get('/login', function () use ($app) {
 
 $app->post('/login', function () use ($app) {
     $app->render('login.php', array('error' => $app->view()->tr('login-error-dne', array('email' => $app->request()->post('email')))));
-});
+})->name('loginPost');
 </pre>
 
 <p>You can see the login page requires 2 routes, one for displaying the form and a second to receive the form POSTing.</p>
@@ -110,7 +110,7 @@ include 'header.php';
 include 'footer.php';
 </pre>
 
-<p>I would suggest using a Slim-Extras template but to keep this application simple and from having any external dependencies we will turn the tables.  With minimal change to your routes and very little code you can add master template functionality to your custom template and thus preventing the duplication of including the header and footer on each page.</p>
+<p>I would suggest using a Slim-Extras template but to keep this application simple and from having any external dependencies we will turn the tables.  With no change to your routes and very little code you can add master template functionality to your custom template and thus preventing the duplication of including the header and footer on each page.</p>
 
 <p>First we create a custom view class <code>MasterView</code> that extends <code>Slim_View</code>.  We setup a constructor that accepts a master template parameter and stores it.</p>
 
@@ -142,22 +142,21 @@ class MasterView extends Slim_View {
 
 <p>The language resoure files follow the naming convention of <code>lang.en.php</code> where <code>en</code> is the language code.  These are simple PHP files that use an associative array to setup the translations.  Since it is just PHP you can require other files, load them from a <a href="http://redis.io">datastore</a> or use <a href="http://www.php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc">HEREDOC</a> for longer paragraphs.  If a translation is requested for a key that does not exist a blank string is returned and an error is written to the Slim application log.  This could be changed to throw an exception to ensure its not missed during testing.  I also auto require a <code>lang.common.php</code> file that has common terms.  A good example for using this is the language chooser.  You don't display <code>German</code> when on the english site.  You always dipslay <code>Deutsch</code> for all languages so someone looking for the German version will be able to find it.</p>
 
-<p>Sometimes its easier to view all of the content in the context of the page and html rather than in the language resource file. Here you have a few choices.  Say you have an about page that is broken into 4 &ltp%gt; tags.  You can split the p tags over a few language resource keys, use a HEREDOC and put the html in a single resource key or include a language specific sub template.  Here are the implementation options for the <code>about.php</code> view file:</p>
+<p>Sometimes its easier to view all of the content in the context of the page and html rather than in the language resource file. Here you have a few choices.  Say you have an about page that is broken into 4 &lt;p&gt; tags.  You can split the p tags over a few language resource keys, use a HEREDOC and put the html in a single resource key or include a language specific sub template.  Here are the implementation options for the <code>about.php</code> view file:</p>
 
 <pre class="brush:php">
-<p><?php echo $this->tr('about-p1')?></p>
-<p><?php echo $this->tr('about-p2')?></p>
-<p><?php echo $this->tr('about-p3')?></p>
-<p><?php echo $this->tr('about-p4')?></p>
-<?php echo $this->tr('about-content')?>
+<p>&lt;?php echo $this->tr('about-p1')?></p>
+<p>&lt;?php echo $this->tr('about-p2')?></p>
+<p>&lt;?php echo $this->tr('about-p3')?></p>
+<p>&lt;?php echo $this->tr('about-p4')?></p>
 </pre>
 
 <pre class="brush:php">
-<?php echo $this->tr('about-content')?>
+&lt;?php echo $this->tr('about-content')?>
 </pre>
 
 <pre class="brush:php">
-<?php require 'about_'.$lang.'.php'?>
+&lt;?php require 'about_'.$lang.'.php'?>
 </pre>
 
 <p>I think for this example I would choose the 3rd option.  Anything more complicated would require mixins, more child templates etc. etc. and I would really start to lean to looking at the many templating engines out there.  What I do like about this one is that its really simple, easy to understand and flexible since it is just PHP.</p>
@@ -181,7 +180,7 @@ class MultilingualSlim extends Slim {
 
 <h2>Wrap up</h2>
 
-<p>Thats it!  This is a first pass at creating a simple multilingual site using Slim.  There isn't much code here so I think its safe to say someone could to take a look at it and be up and running in a few minutes.  Oh and to try out the repo using composer to install Slim and setup the application autoload you will be up and running in no time!  Jump back to the Spoiler Alert at the beginning to see the commands necessary to try this out.</p>
+<p>Thats it!  This is a first pass at creating a simple multilingual site using Slim.  There isn't much code here so I think its safe to say someone could to take a look and be up and running in a few minutes.  Oh and to try out the repo, use composer to install Slim and setup the application autoload you will be up and running in no time!  Jump back to the Spoiler Alert at the beginning to see the commands necessary to try this out.</p>
 
 <h2>Links</h2>
 

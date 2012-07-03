@@ -1,5 +1,7 @@
 @*Slim wildcard routes via route middleware*@
 
+@import helpers.Html._
+
 <p>As I dig further into the <a href="http://slimframework.com">Slim framework</a> I started reviewing some of the community forum questions.  A fun way to both learn and help is to answer questions from users.  I think its one of the best ways to contribute back as it helps increase the audience of the framework.  It also aleviates the main author from being the only one having to do it all the time.</p>
 
 <p>This morning I read the following question about a wildcard catchall route, <a href="http://help.slimframework.com/discussions/questions/230-can-i-have-a-get-request-with-variable-number-of-parameters-in-the-url">Can I have a GET request with variable number of parameters in the url?</a>  It seems this is something the framework currently doesn't support but is potentially slated for a 1.7 release.  In the meantime I thought a simple solution might be to use route conditions in combination with route middleware to parse the incoming parameter into an array for us.  Lets see how we can get this done in a generic reusable fashion.</p>
@@ -102,3 +104,7 @@ $app->get('/api/getitems/:items', $parseWildcardToArray('items'), function ($ite
 </pre>
 
 <p>As mentioned this could be better if the route middleware was able to inject the new array back into the parameters rather than storing it into the <code>environment</code>.  For now this is an easy solution to implement and is reuseable until the feature is added to the framework itself.</p>
+
+@tags.withPost("slim-wildcard-routes-improved") { post =>
+Read the follow up to see how it was improved in conjuction with the 1.6.4 release... <a href="@urlFull(post)">@post.title</a>
+}

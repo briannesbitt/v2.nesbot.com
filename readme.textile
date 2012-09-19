@@ -1,3 +1,8 @@
+*This site is no longer maintained.  The final version here is built on Play framework BETA 2.0.  I have ported this blog to the Slim Framework.*
+
+*The new version can be seen here: "http://github.com/briannesbitt/nesbot.com":http://github.com/briannesbitt/nesbot.com*
+
+
 h1. nesbot.com
 
 I am making the source code of my personal site available publicly in case it helps anybody.  It's developed using the "playframework":http://playframework.org/.  Previously the site was developed against v1.2.3.  Play recently released a BETA version of their upcoming 2.0 release.  I have ported the site to 2.0 BETA and pushed it live.
